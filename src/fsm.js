@@ -41,9 +41,9 @@ class FSM {
     trigger(event) {
         if(!this.states[this.currentState].transitions.hasOwnProperty(String(event)))
             throw Error("This trigger doesn't exist!");
+        this.currentState = this.states[this.currentState].transitions[String(event)];
         if(this.history.length-1>this.currentIndex)
             this.history.splice(this.currentIndex+1, this.history.length-1-this.currentIndex);
-        this.currentState = this.states[this.currentState].transitions[String(event)];
         this.history.push(this.currentState);
         ++this.currentIndex;
     }
